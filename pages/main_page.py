@@ -1,36 +1,33 @@
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from .base_page import BasePage
 from selenium.webdriver.common.by import By
+import allure
 
-class MainPage:
-    def __init__(self, driver):
-        self.driver = driver
+class MainPage(BasePage):
+    LOGO_SCOOTER_LOCATOR = (By.XPATH, "(//img[@alt='Scooter'])[1]")
+    LOGO_YANDEX_LOCATOR = (By.XPATH, "(//img[@alt='Yandex'])[1]")
+    ORDER_BUTTON_TOP_LOCATOR = (By.XPATH, "//button[normalize-space()='Заказать']")
+    ORDER_BUTTON_BOTTOM_LOCATOR = (By.XPATH, "//button[contains(@class, 'Button_Button__ra12g') and normalize-space()='Заказать']")
 
-    # Локаторы
-    LOGO_SCOOTER_LOCATOR = "(//img[@alt='Scooter'])[1]"  # Логотип Scooter
-    LOGO_YANDEX_LOCATOR = "(//img[@alt='Yandex'])[1]"  # Логотип Yandex
-    ORDER_BUTTON_TOP_LOCATOR = "//button[normalize-space()='Заказать']"  # Верхняя кнопка "Заказать"
-    ORDER_BUTTON_BOTTOM_LOCATOR = "//button[contains(@class, 'Button_Button__ra12g') and normalize-space()='Заказать']"  # Нижняя кнопка "Заказать"
-
+    @allure.step("Прокрутить страницу до низа")
     def scroll_to_bottom(self):
         self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
+    @allure.step("Кликнуть на логотип Scooter")
     def click_logo_scooter(self):
-        scooter_logo = WebDriverWait(self.driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, self.LOGO_SCOOTER_LOCATOR)))
-        scooter_logo.click()
+        logo = self.find_element(MainPage.LOGO_SCOOTER_LOCATOR)
+        self.move_to_element_and_click(logo)
 
+    @allure.step("Кликнуть на логотип Yandex")
     def click_logo_yandex(self):
-        yandex_logo = WebDriverWait(self.driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, self.LOGO_YANDEX_LOCATOR)))
-        yandex_logo.click()
+        logo = self.find_element(MainPage.LOGO_YANDEX_LOCATOR)
+        self.move_to_element_and_click(logo)
 
+    @allure.step("Открыть верхний блок заказа")
     def open_top_order_button(self):
-        top_order_btn = WebDriverWait(self.driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, self.ORDER_BUTTON_TOP_LOCATOR)))
-        top_order_btn.click()
+        btn = self.find_element(MainPage.ORDER_BUTTON_TOP_LOCATOR)
+        self.move_to_element_and_click(btn)
 
+    @allure.step("Открыть нижний блок заказа")
     def open_bottom_order_button(self):
-        bottom_order_btn = WebDriverWait(self.driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, self.ORDER_BUTTON_BOTTOM_LOCATOR)))
-        bottom_order_btn.click()
+        btn = self.find_element(MainPage.ORDER_BUTTON_BOTTOM_LOCATOR)
+        self.move_to_element_and_click(btn)
