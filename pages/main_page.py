@@ -8,10 +8,6 @@ class MainPage(BasePage):
     ORDER_BUTTON_TOP_LOCATOR = (By.XPATH, "//button[normalize-space()='Заказать']")
     ORDER_BUTTON_BOTTOM_LOCATOR = (By.XPATH, "//button[contains(@class, 'Button_Button__ra12g') and normalize-space()='Заказать']")
 
-    @allure.step("Прокрутить страницу до низа")
-    def scroll_to_bottom(self):
-        self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-
     @allure.step("Кликнуть на логотип Scooter")
     def click_logo_scooter(self):
         logo = self.find_element(MainPage.LOGO_SCOOTER_LOCATOR)
@@ -24,10 +20,10 @@ class MainPage(BasePage):
 
     @allure.step("Открыть верхний блок заказа")
     def open_top_order_button(self):
-        btn = self.find_element(MainPage.ORDER_BUTTON_TOP_LOCATOR)
-        self.move_to_element_and_click(btn)
+        button = self.find_element(MainPage.ORDER_BUTTON_TOP_LOCATOR)
+        self.move_to_element_and_click(button)
 
     @allure.step("Открыть нижний блок заказа")
     def open_bottom_order_button(self):
-        btn = self.find_element(MainPage.ORDER_BUTTON_BOTTOM_LOCATOR)
-        self.move_to_element_and_click(btn)
+        button = self.find_element(MainPage.ORDER_BUTTON_BOTTOM_LOCATOR)
+        self.move_to_element_and_click(button)
