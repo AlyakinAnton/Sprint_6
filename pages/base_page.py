@@ -1,3 +1,4 @@
+# pages/base_page.py
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
@@ -28,3 +29,11 @@ class BasePage:
     def attach_screenshot(self, name):
         screenshot_bytes = self.driver.get_screenshot_as_png()
         allure.attach(screenshot_bytes, name=name, attachment_type=AttachmentType.PNG)
+
+    def get_current_url(self):
+        return self.driver.current_url
+
+    def switch_to_newest_window(self):
+        handles = self.driver.window_handles
+        newest_handle = handles[-1]
+        self.driver.switch_to.window(newest_handle)

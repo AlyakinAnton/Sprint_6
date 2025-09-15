@@ -1,4 +1,3 @@
-# tests/test_order_flow.py
 import pytest
 from pages.main_page import MainPage
 from pages.orders_form import OrdersForm

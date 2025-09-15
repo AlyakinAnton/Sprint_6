@@ -1,4 +1,3 @@
-# pages/orders_form.py
 from .base_page import BasePage
 from selenium.webdriver.common.by import By
 import allure
